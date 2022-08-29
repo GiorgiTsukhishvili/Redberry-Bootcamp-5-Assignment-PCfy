@@ -30,6 +30,16 @@
     font-weight: 500;
     border-radius: 8px;
     margin-top: 26px;
+    transition: all 0.3s;
+    line-height: 24px;
+  }
+
+  &__button:hover {
+    transform: translateY(-3px);
+  }
+
+  &__button:active {
+    transform: translateY(1px);
   }
 }
 
