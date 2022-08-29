@@ -1,9 +1,8 @@
-import React from 'react'
+import React from "react";
+import "./styles/general/App.scss";
 
 const App = () => {
-  return (
-    <div>App</div>
-  )
-}
+  return <div className="App">ჩანაწერის დამატება</div>;
+};
 
-export default App
+export default App;
