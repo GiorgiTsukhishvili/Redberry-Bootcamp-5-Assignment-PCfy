@@ -9,9 +9,8 @@ import "../styles/Lists/EachLaptop.scss";
 const EachComputer = ({ data }: { data: Laptops }) => {
   const { laptop, user } = data;
 
-  // I created three post requests to fast and because of that
-  // 3 links give error in response as imgs do not exist, I am unable to
-  // remove images from backend and this errors will stay for now.
+  // I created four post requests from online API to just to get data in
+  // order to create design
 
   const imgUrl = "https://pcfy.redberryinternship.ge" + laptop.image;
 
@@ -25,7 +24,10 @@ const EachComputer = ({ data }: { data: Laptops }) => {
 
         <h1 className="each-computer__brand">{laptop.name}</h1>
 
-        <Link to="/" className="each-computer__more">
+        <Link
+          to={`/computer-details/${laptop.id}`}
+          className="each-computer__more"
+        >
           მეტის ნახვა
         </Link>
       </div>
