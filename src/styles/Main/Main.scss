@@ -1,0 +1,56 @@
+@import "../styleUtilities/Variables.scss";
+
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &__logo {
+    margin: 79px 0 85px 0;
+  }
+
+  &__image {
+    margin-bottom: 97px;
+  }
+
+  &__image-phone {
+    display: none;
+  }
+
+  &__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    background-color: $button-color;
+    width: 387px;
+    height: 60px;
+    font-size: 20px;
+    font-weight: 500;
+    border-radius: 8px;
+    margin-top: 26px;
+  }
+}
+
+@media (max-width: 395px) {
+  .main {
+    &__logo {
+      margin: 67px 0 117px 0;
+    }
+
+    &__image {
+      display: none;
+    }
+
+    &__image-phone {
+      display: block;
+      margin-bottom: 106px;
+    }
+
+    &__button {
+      width: 358px;
+      margin-top: 16px;
+    }
+  }
+}
