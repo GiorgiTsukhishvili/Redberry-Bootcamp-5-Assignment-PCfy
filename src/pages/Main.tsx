@@ -12,10 +12,10 @@ const Main = () => {
   return (
     <div className="main">
       <img src={Logo} alt="Logo" className="main__logo" />
-      <img src={MainImage} alt="Landing Photo" className="main__image" />
+      <img src={MainImage} alt="Landing Desktop" className="main__image" />
       <img
         src={MainImagePhone}
-        alt="Landing Photo"
+        alt="Landing Mobile"
         className="main__image-phone"
       />
 

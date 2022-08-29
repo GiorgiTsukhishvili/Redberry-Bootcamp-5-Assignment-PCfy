@@ -1,0 +1,40 @@
+.each-computer {
+  width: 563px;
+  height: 205px;
+  background: #eafaff;
+  border: 1px solid #aed1ea;
+  border-radius: 20px;
+  display: flex;
+
+  &__image {
+    background-color: black;
+    width: 266px;
+    border-radius: 10px;
+    height: 178px;
+    object-fit: cover;
+    margin: 14px 28px 13px 14px;
+  }
+
+  &__person {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 21px;
+    margin: 45px 0 18px 0;
+  }
+
+  &__brand {
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 21px;
+    margin-bottom: 40px;
+  }
+
+  &__more {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 21px;
+    text-decoration-line: underline;
+    color: #4386a9;
+    cursor: pointer;
+  }
+}
