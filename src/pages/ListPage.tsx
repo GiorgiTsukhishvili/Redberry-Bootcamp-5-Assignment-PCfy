@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { fetchAll } from "../utilities/fetchLeptops";
 import { Laptops } from "../utilities/interfaces";
 import ArrowDesktop from "../assets/images/Arrow-back-desktop.svg";
+import ArrowMobile from "../assets/images/Arrow-back-mobile.svg";
 import EachLaptop from "../components/EachComputer";
 
 import "../styles/Lists/ListPage.scss";
@@ -31,6 +32,11 @@ const ListPage = () => {
           src={ArrowDesktop}
           alt="Arrow"
           className="list-page__arrow--desktop"
+        />
+        <img
+          src={ArrowMobile}
+          alt="Arrow"
+          className="list-page__arrow--mobile"
         />
       </Link>
       <h1 className="list-page__header">ჩანაწერების სია</h1>

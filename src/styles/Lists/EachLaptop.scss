@@ -37,3 +37,30 @@
     cursor: pointer;
   }
 }
+
+@media (max-width: 395px) {
+  .each-computer {
+    width: 358px;
+    height: 123px;
+
+    &__image {
+      width: 164px;
+      border-radius: 6px;
+      height: 109px;
+      margin: 7px 16px 7px 7px;
+    }
+
+    &__person {
+      font-size: 14px;
+      margin: 19px 0 8px 0;
+    }
+
+    &__brand {
+      margin-bottom: 11px;
+    }
+
+    &__more {
+      font-size: 14px;
+    }
+  }
+}
