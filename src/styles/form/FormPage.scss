@@ -1,0 +1,43 @@
+.form {
+  background-color: #f7f7f7;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  &__arrow--desktop {
+    position: absolute;
+    top: 53px;
+    left: 70px;
+    cursor: pointer;
+  }
+
+  &__arrow--mobile {
+    display: none;
+  }
+
+  &__logo {
+    margin: 67px 0 45px 0;
+  }
+}
+
+@media (max-width: 395px) {
+  .form {
+    &__arrow--desktop {
+      display: none;
+    }
+
+    &__arrow--mobile {
+      display: block;
+      position: absolute;
+      top: 34px;
+      left: 20px;
+      cursor: pointer;
+    }
+
+    &__logo {
+      display: none;
+    }
+  }
+}
