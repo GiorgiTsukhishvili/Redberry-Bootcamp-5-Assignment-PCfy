@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
 import ArrowDesktop from "../assets/images/Arrow-back-desktop.svg";
+import ArrowMobile from "../assets/images/Arrow-back-mobile.svg";
 import { fetchSignle } from "../utilities/fetchLeptops";
 import { LaptopData, Team, Position } from "../utilities/interfaces";
 import ComputerDetailMiddle from "../components/ComputerDetailMiddle";
@@ -61,6 +62,11 @@ const ComputerDetail = () => {
           alt="Arrow"
           className="computer-detail__arrow--desktop"
         />
+        <img
+          src={ArrowMobile}
+          alt="Arrow"
+          className="computer-detail__arrow--mobile"
+        />
       </Link>
       <h1 className="computer-detail__header">ლეპტოპის ინფო</h1>
 
@@ -72,19 +78,21 @@ const ComputerDetail = () => {
               alt="Laptop"
               className="computer-detail__container__top__image"
             />
-            <div className="computer-detail__container__top__middle-section">
-              <h1>სახელი:</h1>
-              <h1>თიმი:</h1>
-              <h1>პოზიცია:</h1>
-              <h1>მეილი:</h1>
-              <h1>ტელ. ნომერი:</h1>
-            </div>
-            <div className="computer-detail__container__top__middle-right">
-              <h1>{single.user.name}</h1>
-              <h1>{teamName?.name}</h1>
-              <h1>{positionName?.name}</h1>
-              <h1>{single.user.email}</h1>
-              <h1>{single.user.phone_number}</h1>
+            <div className="computer-detail__container__top__content">
+              <div className="computer-detail__container__top__content__middle-section">
+                <h1>სახელი:</h1>
+                <h1>თიმი:</h1>
+                <h1>პოზიცია:</h1>
+                <h1>მეილი:</h1>
+                <h1>ტელ. ნომერი:</h1>
+              </div>
+              <div className="computer-detail__container__top__content__middle-right">
+                <h1>{single.user.name}</h1>
+                <h1>{teamName?.name}</h1>
+                <h1>{positionName?.name}</h1>
+                <h1>{single.user.email}</h1>
+                <h1>{single.user.phone_number}</h1>
+              </div>
             </div>
           </div>
           <div className="computer-detail__container__middle">

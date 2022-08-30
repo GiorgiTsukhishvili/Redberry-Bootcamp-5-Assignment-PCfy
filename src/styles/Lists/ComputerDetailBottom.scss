@@ -24,3 +24,28 @@
     }
   }
 }
+
+@media (max-width: 395px) {
+  .computer-detail__container__bottom__left,
+  .computer-detail__container__bottom__right {
+    gap: 10px;
+    display: flex;
+
+    &-left {
+      & h1 {
+        font-size: 14px;
+        width: 187px;
+        line-height: 25px;
+        margin-bottom: 0;
+      }
+    }
+
+    &-right {
+      & h1 {
+        font-size: 14px;
+        line-height: 25px;
+        margin-bottom: 0;
+      }
+    }
+  }
+}

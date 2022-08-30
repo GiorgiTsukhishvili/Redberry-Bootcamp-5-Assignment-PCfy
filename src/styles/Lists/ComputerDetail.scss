@@ -11,6 +11,10 @@
     cursor: pointer;
   }
 
+  &__arrow--mobile {
+    display: none;
+  }
+
   &__header {
     font-weight: 700;
     font-size: 34px;
@@ -32,26 +36,30 @@
       &__image {
         width: 577px;
         height: 342px;
-        object-fit: cover;
+        object-fit: contain;
       }
 
-      &__middle-section {
-        & h1 {
-          font-weight: 500;
-          font-size: 22px;
-          line-height: 27px;
-          color: #2e2e2e;
-          margin-bottom: 32px;
+      &__content {
+        display: flex;
+        &__middle-section {
+          margin-right: 61px;
+          & h1 {
+            font-weight: 500;
+            font-size: 22px;
+            line-height: 27px;
+            color: #2e2e2e;
+            margin-bottom: 32px;
+          }
         }
-      }
 
-      &__middle-right {
-        & h1 {
-          font-weight: 400;
-          font-size: 22px;
-          line-height: 27px;
-          color: #797979;
-          margin-bottom: 32px;
+        &__middle-right {
+          & h1 {
+            font-weight: 400;
+            font-size: 22px;
+            line-height: 27px;
+            color: #797979;
+            margin-bottom: 32px;
+          }
         }
       }
     }
@@ -65,6 +73,79 @@
       padding: 54px 0 54px 0;
       display: flex;
       gap: 110px;
+    }
+  }
+}
+
+@media (max-width: 395px) {
+  .computer-detail {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    &__arrow--desktop {
+      display: none;
+    }
+
+    &__arrow--mobile {
+      display: block;
+      position: absolute;
+      top: 34px;
+      left: 20px;
+      cursor: pointer;
+    }
+
+    &__header {
+      font-size: 16px;
+      line-height: 20px;
+      margin: 31px 0 33px 0;
+    }
+
+    &__container {
+      width: 358px;
+
+      &__top {
+        display: flex;
+        flex-direction: column;
+        padding-bottom: 17px;
+
+        &__image {
+          width: 358px;
+          height: 191px;
+        }
+
+        &__content {
+          width: 358px;
+          display: flex;
+          margin-top: 29px;
+          justify-content: space-between;
+
+          &__middle-section {
+            & h1 {
+              font-size: 14px;
+              line-height: 178%;
+              margin-bottom: 0;
+            }
+          }
+
+          &__middle-right {
+            & h1 {
+              font-size: 14px;
+              line-height: 25px;
+              margin-bottom: 0;
+            }
+          }
+        }
+      }
+
+      &__middle,
+      &__bottom {
+        padding: 23px 0 41px 0;
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+      }
     }
   }
 }
