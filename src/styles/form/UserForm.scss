@@ -1,0 +1,114 @@
+.user-form {
+  background: #ffffff;
+  border-radius: 18px;
+  width: 1226px;
+  height: 973px;
+  margin-top: 42px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+
+  &__form {
+    &__user {
+      display: flex;
+      gap: 63px;
+      margin-top: 88px;
+
+      &-left,
+      &-right {
+        display: flex;
+        flex-direction: column;
+        &__name-label,
+        &__lastName-label {
+          font-style: normal;
+          font-weight: 500;
+          font-size: 18px;
+          line-height: 21px;
+          color: black;
+          margin-bottom: 8px;
+        }
+
+        #user-form__form__user-left__name,
+        #user-form__form__user-right__lastName {
+          border: 1.8px solid #8ac0e2;
+          border-radius: 8px;
+          width: 375px;
+          height: 50px;
+          padding: 20px 16px;
+          font-style: normal;
+          font-weight: 400;
+          font-size: 16px;
+          line-height: 21px;
+        }
+
+        p {
+          font-style: normal;
+          font-weight: 300;
+          font-size: 14px;
+          line-height: 21px;
+          color: #2e2e2e;
+          margin-top: 8px;
+        }
+      }
+    }
+
+    &__mail,
+    &__phone {
+      display: flex;
+      flex-direction: column;
+      margin-top: 43px;
+
+      &__input-label {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 21px;
+        color: black;
+        margin-bottom: 8px;
+      }
+
+      #user-form__form__mail__input,
+      #user-form__form__phone__input {
+        border: 1.8px solid #8ac0e2;
+        border-radius: 8px;
+        font-family: inherit;
+
+        height: 50px;
+        padding: 20px 16px;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 21px;
+      }
+
+      p {
+        font-style: normal;
+        font-weight: 300;
+        font-size: 14px;
+        line-height: 21px;
+        color: #2e2e2e;
+        margin-top: 8px;
+      }
+    }
+  }
+
+  &__button {
+    width: 176px;
+    height: 60px;
+    background: #62a1eb;
+    border-radius: 8px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    border: none;
+    color: #ffffff;
+    cursor: pointer;
+    position: absolute;
+    font-family: inherit;
+    bottom: 44px;
+    right: 174px;
+  }
+}

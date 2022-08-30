@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import FormPageTop from "../components/FormPage/FormPageTop";
+import UserForm from "../components/FormPage/UserForm";
 
 import ArrowDesktop from "../assets/images/Arrow-back-desktop.svg";
 import ArrowMobile from "../assets/images/Arrow-back-mobile.svg";
@@ -21,6 +22,8 @@ const FormPage = () => {
       </Link>
 
       <FormPageTop page={page} />
+
+      {page ? <UserForm /> : ""}
 
       <img src={LogoLarge} alt="Logo" className="form__logo" />
     </div>
