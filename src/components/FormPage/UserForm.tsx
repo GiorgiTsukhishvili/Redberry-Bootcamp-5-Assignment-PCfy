@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import Select from "react-dropdown-select";
 import { useForm } from "react-hook-form";
@@ -13,6 +13,34 @@ interface UserForm {
 }
 
 const UserForm = () => {
+  const [inputs, setInputs] = useState<UserForm>({
+    name: "",
+    surname: "",
+    email: "",
+    phone_number: "",
+  });
+
+  useEffect(() => {
+    const fromLocal = localStorage.getItem("user");
+    if (fromLocal) {
+      setInputs(JSON.parse(fromLocal));
+    }
+  }, []);
+
+  useEffect(() => {
+    let time: any;
+
+    // I decided to set this simple timeout of 1 second to not update local storage every
+    // time and save some memory
+
+    time = setTimeout(
+      () => localStorage.setItem("user", JSON.stringify(inputs)),
+      1000
+    );
+
+    return () => clearTimeout(time);
+  }, [inputs]);
+
   const {
     register,
     handleSubmit,
@@ -21,6 +49,10 @@ const UserForm = () => {
   const onSubmit = handleSubmit((data) => {
     console.log(data);
   });
+
+  const saveInputs = (e: string, input: string) => {
+    setInputs({ ...inputs, [e]: input });
+  };
 
   return (
     <div className="user-form">
@@ -46,6 +78,8 @@ const UserForm = () => {
               style={
                 errors.name ? { borderColor: "#E52F2F", outline: "none" } : {}
               }
+              value={inputs.name}
+              onChange={(e) => saveInputs(e.target.name, e.target.value)}
             />
             {errors.name ? (
               <p style={{ color: "#E52F2F" }}>გამოიყენე ქართული ასოები</p>
@@ -75,6 +109,8 @@ const UserForm = () => {
                   ? { borderColor: "#E52F2F", outline: "none" }
                   : {}
               }
+              value={inputs.surname}
+              onChange={(e) => saveInputs(e.target.name, e.target.value)}
             />
             {errors.surname ? (
               <p style={{ color: "#E52F2F" }}>გამოიყენე ქართული ასოები</p>
@@ -107,6 +143,8 @@ const UserForm = () => {
             style={
               errors.email ? { borderColor: "#E52F2F", outline: "none" } : {}
             }
+            value={inputs.email}
+            onChange={(e) => saveInputs(e.target.name, e.target.value)}
           />
           {errors.email ? (
             <p style={{ color: "#E52F2F" }}>დაამთავრეთ @redberry.ge-ით</p>
@@ -139,6 +177,8 @@ const UserForm = () => {
                 length: (v) => v.length === 13,
               },
             })}
+            value={inputs.phone_number}
+            onChange={(e) => saveInputs(e.target.name, e.target.value)}
             style={
               errors.phone_number
                 ? { borderColor: "#E52F2F", outline: "none" }
