@@ -32,12 +32,36 @@ const LaptopForm = () => {
   } = useForm<LaptopUseForm>();
 
   const onSubmit = handleSubmit((data) => {
-    console.log(data);
+    // console.log(data);
   });
 
-  const transformImage = (files: any) => {
-    console.log(files[0]);
+  const transformImage = async (files: FileList | null) => {
+    if (files !== null) {
+      const convertImage = async () => {
+        return new Promise((resolve, reject) => {
+          const fileReader = new FileReader();
+
+          fileReader.readAsDataURL(files[0]);
+
+          fileReader.onload = () => {
+            resolve(fileReader.result);
+          };
+
+          fileReader.onerror = (error) => {
+            reject(error);
+          };
+        });
+      };
+
+      const convertedImage = await convertImage();
+
+      setLaptopInfo((prevState: LaptopUseForm) => {
+        return { ...prevState, laptop_image: convertedImage };
+      });
+    }
   };
+
+  console.log(laptopInfo);
 
   return (
     <div className="laptop-form">

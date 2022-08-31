@@ -133,7 +133,7 @@ export interface WholeInfo {
 
 export interface LaptopUseForm {
   laptop_name: string;
-  laptop_image: string;
+  laptop_image: string | unknown;
   laptop_brand_id: number | null;
   laptop_cpu: string;
   laptop_cpu_cores: number | null;
