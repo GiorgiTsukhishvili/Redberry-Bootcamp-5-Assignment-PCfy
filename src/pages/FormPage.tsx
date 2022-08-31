@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 import FormPageTop from "../components/FormPage/FormPageTop";
 import UserForm from "../components/FormPage/UserForm";
+import LaptopForm from "../components/FormPage/LaptopForm";
 import { UserFormToSend, WholeInfo } from "../utilities/interfaces";
 
 import ArrowDesktop from "../assets/images/Arrow-back-desktop.svg";
@@ -13,7 +14,7 @@ import LogoLarge from "../assets/images/Logo-large.svg";
 import "../styles/form/FormPage.scss";
 
 const FormPage = () => {
-  const [page, setPage] = useState<boolean>(true);
+  const [page, setPage] = useState<boolean>(false);
   const [userInfo, setUserInfo] = useState<WholeInfo>({
     name: "",
     surname: "",
@@ -57,7 +58,7 @@ const FormPage = () => {
           page={page}
         />
       ) : (
-        ""
+        <LaptopForm />
       )}
 
       <img src={LogoLarge} alt="Logo" className="form__logo" />
