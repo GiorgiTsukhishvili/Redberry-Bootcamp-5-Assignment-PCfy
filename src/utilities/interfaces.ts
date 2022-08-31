@@ -55,6 +55,15 @@ export interface LaptopData {
   };
 }
 
+export interface ComputerDetailsTopProps {
+  singleName: string;
+  teamName: string | undefined;
+  positionName: string | undefined;
+  singleEmail: string;
+  singlePhone: string;
+  singleImg: string;
+}
+
 export interface OnlyLaptop {
   brand_id: number;
   cpu: {

@@ -6,11 +6,12 @@ import ArrowDesktop from "../assets/images/Arrow-back-desktop.svg";
 import ArrowMobile from "../assets/images/Arrow-back-mobile.svg";
 import { fetchSignle } from "../utilities/fetchLeptops";
 import { LaptopData, Team, Position } from "../utilities/interfaces";
-import ComputerDetailMiddle from "../components/ComputerDetailMiddle";
+import ComputerDetailMiddle from "../components/ComputerDetails/ComputerDetailMiddle";
 import { fetchDefault } from "../utilities/fetchdefaults";
-import ComputerDetailBottom from "../components/ComputerDetailBottom";
+import ComputerDetailBottom from "../components/ComputerDetails/ComputerDetailBottom";
 
 import "../styles/Lists/ComputerDetail.scss";
+import ComputerDetailsTop from "../components/ComputerDetails/ComputerDetailsTop";
 
 const ComputerDetail = () => {
   const [single, setSingle] = useState<LaptopData>();
@@ -50,10 +51,6 @@ const ComputerDetail = () => {
     positionDetail();
   }, []);
 
-  console.log(single);
-
-  const imgUrl = "https://pcfy.redberryinternship.ge" + single?.laptop.image;
-
   return (
     <div className="computer-detail">
       <Link to="/list-of-computers">
@@ -72,29 +69,14 @@ const ComputerDetail = () => {
 
       {single ? (
         <div className="computer-detail__container">
-          <div className="computer-detail__container__top">
-            <img
-              src={imgUrl}
-              alt="Laptop"
-              className="computer-detail__container__top__image"
-            />
-            <div className="computer-detail__container__top__content">
-              <div className="computer-detail__container__top__content__middle-section">
-                <h1>სახელი:</h1>
-                <h1>თიმი:</h1>
-                <h1>პოზიცია:</h1>
-                <h1>მეილი:</h1>
-                <h1>ტელ. ნომერი:</h1>
-              </div>
-              <div className="computer-detail__container__top__content__middle-right">
-                <h1>{single.user.name}</h1>
-                <h1>{teamName?.name}</h1>
-                <h1>{positionName?.name}</h1>
-                <h1>{single.user.email}</h1>
-                <h1>{single.user.phone_number}</h1>
-              </div>
-            </div>
-          </div>
+          <ComputerDetailsTop
+            singleName={single.user.name}
+            teamName={teamName?.name}
+            positionName={positionName?.name}
+            singleEmail={single.user.email}
+            singlePhone={single.user.phone_number}
+            singleImg={single.laptop.image}
+          />
           <div className="computer-detail__container__middle">
             {single ? <ComputerDetailMiddle laptop={single.laptop} /> : ""}
           </div>

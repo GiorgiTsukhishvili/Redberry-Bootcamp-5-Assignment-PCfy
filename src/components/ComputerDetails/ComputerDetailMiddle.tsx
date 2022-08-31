@@ -1,10 +1,10 @@
 import React, { Fragment, useEffect, useState } from "react";
 
-import { OnlyLaptop } from "../utilities/interfaces";
-import { fetchDefault } from "../utilities/fetchdefaults";
-import { Brand } from "../utilities/interfaces";
+import { OnlyLaptop } from "../../utilities/interfaces";
+import { fetchDefault } from "../../utilities/fetchdefaults";
+import { Brand } from "../../utilities/interfaces";
 
-import "../styles/Lists/ComputerDetailMiddle.scss";
+import "../../styles/Lists/ComputerDetailMiddle.scss";
 
 const ComputerDetailMiddle = ({ laptop }: { laptop: OnlyLaptop }) => {
   const [brand, setBrand] = useState<Brand[]>();
