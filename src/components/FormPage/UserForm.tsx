@@ -51,12 +51,16 @@ const UserForm = ({
 
   const onSubmit = handleSubmit((data) => {
     if (inputs.team_id === null) {
-      setDropdownValid({ ...dropdownValid, first: !dropdownValid.first });
+      setDropdownValid((prevState: { first: boolean; second: boolean }) => {
+        return { ...prevState, first: !dropdownValid.first };
+      });
       return;
     }
 
     if (inputs.position_id === null) {
-      setDropdownValid({ ...dropdownValid, second: !dropdownValid.second });
+      setDropdownValid((prevState: { first: boolean; second: boolean }) => {
+        return { ...prevState, second: !dropdownValid.second };
+      });
       return;
     }
 
@@ -67,7 +71,9 @@ const UserForm = ({
   useEffect(() => {
     const fromLocal = localStorage.getItem("user");
     if (fromLocal) {
-      setInputs(JSON.parse(fromLocal));
+      setInputs((prevState: UseForm) => {
+        return { ...prevState, ...JSON.parse(fromLocal) };
+      });
     }
   }, []);
 
@@ -122,15 +128,21 @@ const UserForm = ({
   }, [inputs.team_id]);
 
   const saveInputs = (e: string, input: string) => {
-    setInputs({ ...inputs, [e]: input });
+    setInputs((prevState: UseForm) => {
+      return { ...prevState, [e]: input };
+    });
   };
 
   const changeFirst = (value: string) => {
-    setInputs({ ...inputs, team_id: +value });
+    setInputs((prevState: UseForm) => {
+      return { ...prevState, team_id: +value };
+    });
   };
 
   const changeSecond = (value: string) => {
-    setInputs({ ...inputs, position_id: +value });
+    setInputs((prevState: UseForm) => {
+      return { ...prevState, position_id: +value };
+    });
   };
 
   const defaultOptionOne =
