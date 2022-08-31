@@ -14,7 +14,7 @@ const ComputerDetailBottom = ({ laptop }: { laptop: OnlyLaptop }) => {
         </div>
         <div className="computer-detail__container__bottom__left-right">
           <h1>{laptop.state}</h1>
-          <h1>{laptop.price}</h1>
+          <h1>{laptop.price} ₾</h1>
         </div>
       </div>
 
