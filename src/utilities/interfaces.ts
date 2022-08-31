@@ -130,3 +130,17 @@ export interface WholeInfo {
   laptop_purchase_date: string;
   laptop_price: number | null;
 }
+
+export interface LaptopUseForm {
+  laptop_name: string;
+  laptop_image: string;
+  laptop_brand_id: number | null;
+  laptop_cpu: string;
+  laptop_cpu_cores: number | null;
+  laptop_cpu_threads: number | null;
+  laptop_ram: number | null;
+  laptop_hard_drive_type: string;
+  laptop_state: string;
+  laptop_purchase_date: string;
+  laptop_price: number | null;
+}
