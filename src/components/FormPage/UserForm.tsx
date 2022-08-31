@@ -50,16 +50,22 @@ const UserForm = ({
   } = useForm<UseForm>();
 
   const onSubmit = handleSubmit((data) => {
-    if (inputs.team_id === null) {
+    if (inputs.team_id === null && inputs.position_id === null) {
       setDropdownValid((prevState: { first: boolean; second: boolean }) => {
-        return { ...prevState, first: !dropdownValid.first };
+        return { ...prevState, first: false };
+      });
+      setDropdownValid((prevState: { first: boolean; second: boolean }) => {
+        return { ...prevState, second: false };
       });
       return;
-    }
-
-    if (inputs.position_id === null) {
+    } else if (inputs.team_id === null) {
       setDropdownValid((prevState: { first: boolean; second: boolean }) => {
-        return { ...prevState, second: !dropdownValid.second };
+        return { ...prevState, first: false };
+      });
+      return;
+    } else if (inputs.position_id === null) {
+      setDropdownValid((prevState: { first: boolean; second: boolean }) => {
+        return { ...prevState, second: false };
       });
       return;
     }
@@ -137,11 +143,20 @@ const UserForm = ({
     setInputs((prevState: UseForm) => {
       return { ...prevState, team_id: +value };
     });
+    setDropdownValid((prevState: { first: boolean; second: boolean }) => {
+      return { ...prevState, first: true };
+    });
+    setInputs((prevState: UseForm) => {
+      return { ...prevState, position_id: null };
+    });
   };
 
   const changeSecond = (value: string) => {
     setInputs((prevState: UseForm) => {
       return { ...prevState, position_id: +value };
+    });
+    setDropdownValid((prevState: { first: boolean; second: boolean }) => {
+      return { ...prevState, second: true };
     });
   };
 
