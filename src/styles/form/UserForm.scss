@@ -157,3 +157,99 @@
     color: #000000;
   }
 }
+
+@media (max-width: 395px) {
+  .user-form {
+    border-radius: 12px;
+    width: 390px;
+    height: 919px;
+    margin-top: 11px;
+
+    &__form {
+      &__user {
+        flex-direction: column;
+        gap: 7px;
+        margin-top: 30px;
+        align-items: center;
+
+        &-left,
+        &-right {
+          display: flex;
+          flex-direction: column;
+
+          #user-form__form__user-left__name,
+          #user-form__form__user-right__lastName {
+            width: 358px;
+          }
+        }
+      }
+
+      &__mail,
+      &__phone {
+        margin-top: 9px;
+        justify-content: center;
+        width: 358px;
+        margin: 9px auto 0 auto;
+
+        &__input-label {
+          font-style: normal;
+          font-weight: 500;
+          font-size: 18px;
+          line-height: 21px;
+          color: black;
+          margin-bottom: 8px;
+        }
+
+        #user-form__form__mail__input,
+        #user-form__form__phone__input {
+          border: 1.8px solid #8ac0e2;
+          border-radius: 8px;
+          font-family: inherit;
+
+          height: 50px;
+          padding: 20px 16px;
+          font-style: normal;
+          font-weight: 400;
+          font-size: 16px;
+          line-height: 21px;
+
+          &:focus {
+            background: rgba(43, 75, 242, 0.06);
+            border: 1.8px solid #6499ff;
+            outline-color: #6499ff;
+          }
+        }
+
+        p {
+          font-style: normal;
+          font-weight: 300;
+          font-size: 14px;
+          line-height: 21px;
+          color: #2e2e2e;
+          margin-top: 8px;
+        }
+      }
+    }
+
+    &__button {
+      width: 132px;
+      height: 46px;
+      background: #62a1eb;
+      font-size: 18px;
+      line-height: 22px;
+      bottom: 185px;
+      right: 16px;
+    }
+
+    &__dropdown,
+    &__dropdown--wrong {
+      margin: 18px auto 0 auto;
+      width: 358px;
+    }
+
+    &__menu {
+      width: 358px;
+      transform: translateX(10px);
+    }
+  }
+}
