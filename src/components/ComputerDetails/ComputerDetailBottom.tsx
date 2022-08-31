@@ -1,8 +1,8 @@
 import React, { Fragment } from "react";
 
-import { OnlyLaptop } from "../utilities/interfaces";
+import { OnlyLaptop } from "../../utilities/interfaces";
 
-import "../styles/Lists/ComputerDetailBottom.scss";
+import "../../styles/Lists/ComputerDetailBottom.scss";
 
 const ComputerDetailBottom = ({ laptop }: { laptop: OnlyLaptop }) => {
   return (
