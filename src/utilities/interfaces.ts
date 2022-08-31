@@ -86,3 +86,47 @@ export interface Brand {
   id: number;
   name: string;
 }
+
+export interface TeamModified {
+  value: string;
+  label: string;
+}
+
+export interface UseForm {
+  name: string;
+  surname: string;
+  email: string;
+  phone_number: string;
+  team_id: number | null;
+  position_id: number | null;
+}
+
+export interface UserFormToSend {
+  name: string;
+  surname: string;
+  email: string;
+  phone_number: string;
+  team_id: number | null;
+  position_id: number | null;
+}
+
+export interface WholeInfo {
+  name: string;
+  surname: string;
+  email: string;
+  phone_number: string;
+  team_id: number | null;
+  position_id: number | null;
+  token: string;
+  laptop_name: string;
+  laptop_image: string;
+  laptop_brand_id: number | null;
+  laptop_cpu: string;
+  laptop_cpu_cores: number | null;
+  laptop_cpu_threads: number | null;
+  laptop_ram: number | null;
+  laptop_hard_drive_type: string;
+  laptop_state: string;
+  laptop_purchase_date: string;
+  laptop_price: number | null;
+}

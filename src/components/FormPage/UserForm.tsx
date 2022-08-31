@@ -1,23 +1,67 @@
 import React, { useEffect, useState } from "react";
 
-import Select from "react-dropdown-select";
 import { useForm } from "react-hook-form";
+
+import { fetchDefault } from "../../utilities/fetchdefaults";
+import {
+  Team,
+  TeamModified,
+  Position,
+  UseForm,
+  UserFormToSend,
+} from "../../utilities/interfaces";
+
+import Dropdown from "react-dropdown";
+import "react-dropdown/style.css";
 
 import "../../styles/form/UserForm.scss";
 
-interface UserForm {
-  name: string;
-  surname: string;
-  email: string;
-  phone_number: string;
-}
-
-const UserForm = () => {
-  const [inputs, setInputs] = useState<UserForm>({
+const UserForm = ({
+  updateInfo,
+  setPage,
+  page,
+}: {
+  updateInfo: (info: UserFormToSend) => void;
+  setPage: (value: boolean) => void;
+  page: boolean;
+}) => {
+  const [inputs, setInputs] = useState<UseForm>({
     name: "",
     surname: "",
     email: "",
     phone_number: "",
+    team_id: null,
+    position_id: null,
+  });
+  const [firstDropdown, setFirstDropdown] = useState<TeamModified[]>([]);
+  const [secondDropdown, setSecondDropdown] = useState<TeamModified[]>([]);
+  const [dropdownValid, setDropdownValid] = useState<{
+    first: boolean;
+    second: boolean;
+  }>({
+    first: true,
+    second: true,
+  });
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<UseForm>();
+
+  const onSubmit = handleSubmit((data) => {
+    if (inputs.team_id === null) {
+      setDropdownValid({ ...dropdownValid, first: !dropdownValid.first });
+      return;
+    }
+
+    if (inputs.position_id === null) {
+      setDropdownValid({ ...dropdownValid, second: !dropdownValid.second });
+      return;
+    }
+
+    updateInfo(inputs);
+    setPage(!page);
   });
 
   useEffect(() => {
@@ -41,18 +85,66 @@ const UserForm = () => {
     return () => clearTimeout(time);
   }, [inputs]);
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<UserForm>();
-  const onSubmit = handleSubmit((data) => {
-    console.log(data);
-  });
+  useEffect(() => {
+    const dataToUse: TeamModified[] = [];
+
+    const fetch = async () => {
+      const data = await fetchDefault("teams");
+
+      data.data.forEach((item: Team) =>
+        dataToUse.push({ value: item.id.toString(), label: item.name })
+      );
+
+      setFirstDropdown(dataToUse);
+    };
+
+    fetch();
+  }, []);
+
+  useEffect(() => {
+    const dataToUse: TeamModified[] = [];
+
+    const fetch = async () => {
+      const data = await fetchDefault("positions");
+
+      const chosenTeam = data.data.filter(
+        (item: Position) => item.team_id === inputs.team_id
+      );
+
+      chosenTeam.forEach((item: Team) =>
+        dataToUse.push({ value: item.id.toString(), label: item.name })
+      );
+
+      setSecondDropdown(dataToUse);
+    };
+
+    fetch();
+  }, [inputs.team_id]);
 
   const saveInputs = (e: string, input: string) => {
     setInputs({ ...inputs, [e]: input });
   };
+
+  const changeFirst = (value: string) => {
+    setInputs({ ...inputs, team_id: +value });
+  };
+
+  const changeSecond = (value: string) => {
+    setInputs({ ...inputs, position_id: +value });
+  };
+
+  const defaultOptionOne =
+    inputs.team_id !== null
+      ? firstDropdown.find((item) => item.value === inputs.team_id?.toString())
+          ?.value
+      : "";
+
+  const defaultOptionTwo =
+    inputs.position_id !== null
+      ? secondDropdown.find(
+          (item) => item.value === inputs.position_id?.toString()
+        )?.value
+      : "";
 
   return (
     <div className="user-form">
@@ -119,6 +211,33 @@ const UserForm = () => {
             )}
           </div>
         </div>
+        <Dropdown
+          options={firstDropdown}
+          value={defaultOptionOne}
+          placeholder="თიმი"
+          controlClassName={
+            dropdownValid.first
+              ? "user-form__dropdown"
+              : "user-form__dropdown--wrong"
+          }
+          arrowClassName="user-form__arrow"
+          menuClassName="user-form__menu"
+          onChange={(e) => changeFirst(e.value)}
+        />
+
+        <Dropdown
+          options={secondDropdown}
+          value={defaultOptionTwo}
+          placeholder="პოზიცია"
+          controlClassName={
+            dropdownValid.second
+              ? "user-form__dropdown"
+              : "user-form__dropdown--wrong"
+          }
+          arrowClassName="user-form__arrow"
+          menuClassName="user-form__menu"
+          onChange={(e) => changeSecond(e.value)}
+        />
 
         <div className="user-form__form__mail">
           <label
@@ -152,7 +271,6 @@ const UserForm = () => {
             <p>უნდა მთავრდებოდეს @redberry.ge-ით</p>
           )}
         </div>
-
         <div className="user-form__form__phone">
           <label
             htmlFor="user-form__form__phone__input"
@@ -193,7 +311,6 @@ const UserForm = () => {
             <p>უნდა აკმაყოფილებდეს ქართული მობ-ნომრის ფორმატს</p>
           )}
         </div>
-
         <button className="user-form__button">შემდეგი</button>
       </form>
     </div>
@@ -201,13 +318,3 @@ const UserForm = () => {
 };
 
 export default UserForm;
-
-{
-  /* <Select
-        placeholder="Type to match nothing 😱"
-        multi
-        onChange={() => undefined}
-        values={[]}
-        options={[]}
-      /> */
-}
