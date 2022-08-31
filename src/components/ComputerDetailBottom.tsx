@@ -18,7 +18,7 @@ const ComputerDetailBottom = ({ laptop }: { laptop: OnlyLaptop }) => {
         </div>
       </div>
 
-      {laptop.purchase_date !== null ? (
+      {laptop.purchase_date !== null || laptop.purchase_date === "" ? (
         <div className="computer-detail__container__bottom__right">
           <div className="computer-detail__container__bottom__right-left">
             <h1>შევსების რიცხვი:</h1>
