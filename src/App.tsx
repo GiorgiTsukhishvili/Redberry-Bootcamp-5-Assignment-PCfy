@@ -5,6 +5,7 @@ import { Route, Routes } from "react-router-dom";
 import FormPage from "./pages/FormPage";
 import ListPage from "./pages/ListPage";
 import ComputerDetail from "./pages/ComputerDetail";
+import Success from "./pages/Success";
 
 import "./styles/general/App.scss";
 
@@ -16,6 +17,7 @@ const App = () => {
         <Route path="/forms-page" element={<FormPage />} />
         <Route path="/list-of-computers" element={<ListPage />} />
         <Route path="/computer-details/:id" element={<ComputerDetail />} />
+        <Route path="/success" element={<Success />} />
       </Routes>
     </div>
   );

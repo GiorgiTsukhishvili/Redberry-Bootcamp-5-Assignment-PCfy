@@ -61,6 +61,12 @@ const LaptopForm = () => {
     }
   };
 
+  const saveInputs = (e: string, input: string) => {
+    setLaptopInfo((prevState: LaptopUseForm) => {
+      return { ...prevState, [e]: input };
+    });
+  };
+
   console.log(laptopInfo);
 
   return (
@@ -111,6 +117,44 @@ const LaptopForm = () => {
               />
             ) : (
               ""
+            )}
+          </div>
+        </div>
+        <div className="laptop-form__form__top">
+          <div className="laptop-form__form__top-left">
+            <label
+              htmlFor="laptop-form__form__top-left__name"
+              className="laptop-form__form__top-left__name-label"
+              style={errors.laptop_name ? { color: "#E52F2F" } : {}}
+            >
+              ლეპტოპის სახელი
+            </label>
+            <input
+              type="text"
+              id="laptop-form__form__top-left__name"
+              placeholder="გრიშა"
+              {...register("laptop_name", {
+                required: true,
+                minLength: 2,
+                validate: {
+                  hasSpecialChar: (v) =>
+                    /^[a-zA-Z0-9!@#\$%\^\&*\)\(+=._-]+$/g.test(v),
+                },
+              })}
+              style={
+                errors.laptop_name
+                  ? { borderColor: "#E52F2F", outline: "none" }
+                  : {}
+              }
+              value={laptopInfo.laptop_name}
+              onChange={(e) => saveInputs(e.target.name, e.target.value)}
+            />
+            {errors.laptop_name ? (
+              <p style={{ color: "#E52F2F" }}>
+                ლათინური ასოები, ციფრები, !@#$%^&*()_+=
+              </p>
+            ) : (
+              <p>ლათინური ასოები, ციფრები, !@#$%^&*()_+=</p>
             )}
           </div>
         </div>

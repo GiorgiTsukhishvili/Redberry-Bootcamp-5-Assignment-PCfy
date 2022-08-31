@@ -14,7 +14,7 @@ import LogoLarge from "../assets/images/Logo-large.svg";
 import "../styles/form/FormPage.scss";
 
 const FormPage = () => {
-  const [page, setPage] = useState<boolean>(true);
+  const [page, setPage] = useState<boolean>(false);
   const [userInfo, setUserInfo] = useState<WholeInfo>({
     name: "",
     surname: "",
@@ -41,8 +41,6 @@ const FormPage = () => {
       return { ...prevState, ...info };
     });
   };
-
-  console.log(userInfo);
 
   return (
     <div className="form">
