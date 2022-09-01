@@ -93,6 +93,8 @@
     &-right {
       display: flex;
       flex-direction: column;
+      justify-content: center;
+
       &__name-label,
       &__lastName-label {
         font-style: normal;
@@ -129,6 +131,144 @@
         line-height: 21px;
         color: #2e2e2e;
         margin-top: 8px;
+      }
+
+      &__brand,
+      &__brand--wrong {
+        border: none;
+        margin-top: 30px;
+        background-color: #ebebeb;
+        border-radius: 8px;
+        font-family: inherit;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 21px;
+        padding: 16px 16px;
+        width: 408px;
+        height: 60px;
+      }
+
+      &__brand--wrong {
+        border: 1.8px solid #e52f2f;
+      }
+
+      &__arrow {
+        margin: 10px 10px;
+      }
+
+      &__menu {
+        border: none;
+        filter: drop-shadow(0px 4px 34px rgba(0, 0, 0, 0.25));
+        border-radius: 8px;
+        font-family: inherit;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 21px;
+        color: #000000;
+        margin-top: -27px;
+      }
+    }
+  }
+
+  &__form__middle {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 42px;
+    border-bottom: 1px solid #c7c7c7;
+
+    &__top {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 22px;
+      gap: 24px;
+      margin-bottom: 41px;
+
+      &__cpu,
+      &__cpu--wrong {
+        border: none;
+        background-color: #ebebeb;
+        border-radius: 8px;
+        font-family: inherit;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 21px;
+        padding: 16px 16px;
+        width: 277px;
+        height: 60px;
+      }
+
+      &__cpu--wrong {
+        border: 1.8px solid #e52f2f;
+      }
+
+      &-right__arrow {
+        margin: 10px 10px;
+      }
+
+      &-right__menu {
+        border: none;
+        filter: drop-shadow(0px 4px 34px rgba(0, 0, 0, 0.25));
+        border-radius: 8px;
+        font-family: inherit;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 21px;
+        color: #000000;
+      }
+
+      &__input {
+        display: flex;
+        justify-content: center;
+        gap: 24px;
+
+        &__each {
+          display: flex;
+          flex-direction: column;
+
+          &__name-label,
+          &__lastName-label {
+            font-style: normal;
+            font-weight: 500;
+            font-size: 18px;
+            line-height: 21px;
+            color: black;
+            margin-bottom: 8px;
+          }
+
+          #laptop-form__form__middle__top__input__each__name {
+            border: 1.8px solid #8ac0e2;
+            border-radius: 8px;
+            width: 276px;
+            height: 60px;
+            padding: 20px 16px;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 21px;
+
+            &:focus {
+              background: rgba(43, 75, 242, 0.06);
+              border: 1.8px solid #6499ff;
+              outline-color: #6499ff;
+            }
+          }
+
+          p {
+            font-style: normal;
+            font-weight: 300;
+            font-size: 14px;
+            line-height: 21px;
+            color: #2e2e2e;
+            margin-top: 8px;
+          }
+        }
       }
     }
   }
