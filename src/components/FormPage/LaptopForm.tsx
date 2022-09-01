@@ -168,7 +168,9 @@ const LaptopForm = ({ userInfo, setUserInfo }: LaptopFormProps) => {
               alt="Camera"
               className="laptop-form__form__img__camera"
             />
-            <p>ლეპტოპის ფოტოს ატვირთვა</p>
+            <p style={errors.laptop_image ? { color: "#E52F2F" } : {}}>
+              ლეპტოპის ფოტოს ატვირთვა
+            </p>
             {errors.laptop_image ? (
               <img
                 src={ExclSmall}
@@ -253,7 +255,7 @@ const LaptopForm = ({ userInfo, setUserInfo }: LaptopFormProps) => {
                 <label
                   htmlFor="laptop-form__form__middle__top__input__each__name"
                   className="laptop-form__form__middle__top__input__each__name-label"
-                  style={errors.laptop_name ? { color: "#E52F2F" } : {}}
+                  style={errors.laptop_cpu_cores ? { color: "#E52F2F" } : {}}
                 >
                   CPU-ს ბირთვი
                 </label>
@@ -291,7 +293,7 @@ const LaptopForm = ({ userInfo, setUserInfo }: LaptopFormProps) => {
                 <label
                   htmlFor="laptop-form__form__middle__top__input__each__name"
                   className="laptop-form__form__middle__top__input__each__name-label"
-                  style={errors.laptop_name ? { color: "#E52F2F" } : {}}
+                  style={errors.laptop_cpu_threads ? { color: "#E52F2F" } : {}}
                 >
                   CPU-ს ნაკადი
                 </label>
