@@ -15,6 +15,7 @@ import Dropdown from "react-dropdown";
 import "react-dropdown/style.css";
 
 import "../../styles/form/UserForm.scss";
+import setDropdownValidHook from "../../hooks/setDropdownValidHook";
 
 const UserForm = ({
   updateInfo,
@@ -33,15 +34,10 @@ const UserForm = ({
     team_id: null,
     position_id: null,
   });
+
+  const { dropdownValid, changeDropdown } = setDropdownValidHook();
   const [firstDropdown, setFirstDropdown] = useState<TeamModified[]>([]);
   const [secondDropdown, setSecondDropdown] = useState<TeamModified[]>([]);
-  const [dropdownValid, setDropdownValid] = useState<{
-    first: boolean;
-    second: boolean;
-  }>({
-    first: true,
-    second: true,
-  });
 
   const {
     register,
@@ -51,22 +47,14 @@ const UserForm = ({
 
   const onSubmit = handleSubmit((data) => {
     if (inputs.team_id === null && inputs.position_id === null) {
-      setDropdownValid((prevState: { first: boolean; second: boolean }) => {
-        return { ...prevState, first: false };
-      });
-      setDropdownValid((prevState: { first: boolean; second: boolean }) => {
-        return { ...prevState, second: false };
-      });
+      changeDropdown("first", false);
+      changeDropdown("second", false);
       return;
     } else if (inputs.team_id === null) {
-      setDropdownValid((prevState: { first: boolean; second: boolean }) => {
-        return { ...prevState, first: false };
-      });
+      changeDropdown("first", false);
       return;
     } else if (inputs.position_id === null) {
-      setDropdownValid((prevState: { first: boolean; second: boolean }) => {
-        return { ...prevState, second: false };
-      });
+      changeDropdown("second", false);
       return;
     }
 
@@ -86,8 +74,8 @@ const UserForm = ({
   useEffect(() => {
     let time: any;
 
-    // I decided to set this simple timeout of 1 second to not update local storage every
-    // time and save some memory
+    // გადავწყვიტე რო 1 წამიანი თაიმაუთი გამეკეთებინა რომ ყოველ პატარა ჩაწერაზე არ
+    // შემეწუხებინა ლოქალ სთორეჯი, ასე როცა დაამტავრებს ვინმე წერას 1 წამში შეივსება
 
     time = setTimeout(
       () => localStorage.setItem("user", JSON.stringify(inputs)),
@@ -143,9 +131,7 @@ const UserForm = ({
     setInputs((prevState: UseForm) => {
       return { ...prevState, team_id: +value };
     });
-    setDropdownValid((prevState: { first: boolean; second: boolean }) => {
-      return { ...prevState, first: true };
-    });
+    changeDropdown("first", true);
     setInputs((prevState: UseForm) => {
       return { ...prevState, position_id: null };
     });
@@ -155,9 +141,7 @@ const UserForm = ({
     setInputs((prevState: UseForm) => {
       return { ...prevState, position_id: +value };
     });
-    setDropdownValid((prevState: { first: boolean; second: boolean }) => {
-      return { ...prevState, second: true };
-    });
+    changeDropdown("second", true);
   };
 
   const defaultOptionOne =
