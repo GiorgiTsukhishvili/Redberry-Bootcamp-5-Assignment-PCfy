@@ -96,7 +96,22 @@ export interface Brand {
   name: string;
 }
 
+export interface CPU {
+  id: number;
+  name: string;
+}
+
+export interface CPUModified {
+  value: string;
+  label: string;
+}
+
 export interface TeamModified {
+  value: string;
+  label: string;
+}
+
+export interface BrandModified {
   value: string;
   label: string;
 }
