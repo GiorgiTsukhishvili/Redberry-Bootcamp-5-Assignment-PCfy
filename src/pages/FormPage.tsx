@@ -14,7 +14,7 @@ import LogoLarge from "../assets/images/Logo-large.svg";
 import "../styles/form/FormPage.scss";
 
 const FormPage = () => {
-  const [page, setPage] = useState<boolean>(true);
+  const [page, setPage] = useState<boolean>(false);
   const [userInfo, setUserInfo] = useState<WholeInfo>({
     name: "",
     surname: "",
@@ -58,7 +58,7 @@ const FormPage = () => {
           page={page}
         />
       ) : (
-        <LaptopForm />
+        <LaptopForm userInfo={userInfo} setUserInfo={setUserInfo} />
       )}
 
       <img src={LogoLarge} alt="Logo" className="form__logo" />

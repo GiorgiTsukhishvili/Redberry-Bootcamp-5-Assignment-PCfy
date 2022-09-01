@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import { useForm } from "react-hook-form";
 
-import { LaptopUseForm } from "../../utilities/interfaces";
+import { LaptopFormProps, LaptopUseForm } from "../../utilities/interfaces";
 
 import ExclLarge from "../../assets/images/excl-large.svg";
 import ExclSmall from "../../assets/images/excl-small.svg";
@@ -10,21 +10,7 @@ import Camera from "../../assets/images/camera.svg";
 
 import "../../styles/form/LaptopForm.scss";
 
-const LaptopForm = () => {
-  const [laptopInfo, setLaptopInfo] = useState<LaptopUseForm>({
-    laptop_name: "",
-    laptop_image: "",
-    laptop_brand_id: null,
-    laptop_cpu: "",
-    laptop_cpu_cores: null,
-    laptop_cpu_threads: null,
-    laptop_ram: null,
-    laptop_hard_drive_type: "",
-    laptop_state: "",
-    laptop_purchase_date: "",
-    laptop_price: null,
-  });
-
+const LaptopForm = ({ userInfo, setUserInfo }: LaptopFormProps) => {
   const {
     register,
     handleSubmit,
@@ -55,19 +41,15 @@ const LaptopForm = () => {
 
       const convertedImage = await convertImage();
 
-      setLaptopInfo((prevState: LaptopUseForm) => {
-        return { ...prevState, laptop_image: convertedImage };
-      });
+      setUserInfo({ ...userInfo, laptop_image: convertedImage });
     }
   };
 
   const saveInputs = (e: string, input: string) => {
-    setLaptopInfo((prevState: LaptopUseForm) => {
-      return { ...prevState, [e]: input };
-    });
+    setUserInfo({ ...userInfo, [e]: input });
   };
 
-  console.log(laptopInfo);
+  console.log(userInfo);
 
   return (
     <div className="laptop-form">
@@ -146,7 +128,7 @@ const LaptopForm = () => {
                   ? { borderColor: "#E52F2F", outline: "none" }
                   : {}
               }
-              value={laptopInfo.laptop_name}
+              value={userInfo.laptop_name}
               onChange={(e) => saveInputs(e.target.name, e.target.value)}
             />
             {errors.laptop_name ? (

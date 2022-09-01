@@ -128,7 +128,7 @@ export interface WholeInfo {
   position_id: number | null;
   token: string;
   laptop_name: string;
-  laptop_image: string;
+  laptop_image: string | unknown;
   laptop_brand_id: number | null;
   laptop_cpu: string;
   laptop_cpu_cores: number | null;
@@ -152,4 +152,9 @@ export interface LaptopUseForm {
   laptop_state: string;
   laptop_purchase_date: string;
   laptop_price: number | null;
+}
+
+export interface LaptopFormProps {
+  userInfo: WholeInfo;
+  setUserInfo: (info: WholeInfo) => void;
 }
