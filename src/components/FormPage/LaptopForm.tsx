@@ -101,7 +101,6 @@ const LaptopForm = ({ userInfo, setUserInfo }: LaptopFormProps) => {
   };
 
   const saveInputsString = (e: string, input: string) => {
-    console.log(e);
     setUserInfo({ ...userInfo, [e]: input });
   };
 
@@ -345,7 +344,6 @@ const LaptopForm = ({ userInfo, setUserInfo }: LaptopFormProps) => {
                 placeholder="16"
                 {...register("laptop_ram", {
                   required: true,
-                  minLength: 2,
                   validate: {
                     hasSpecialChar: (v) => /^[0-9]+$/.test(v!.toString()),
                   },
@@ -413,8 +411,110 @@ const LaptopForm = ({ userInfo, setUserInfo }: LaptopFormProps) => {
             </div>
           </div>
         </div>
-        <button>sda</button>
+
+        <div className="laptop-form__form__bottom">
+          <div className="laptop-form__form__bottom__container">
+            <div className="laptop-form__form__bottom__container__date">
+              <label htmlFor="date">შეძენის რიცხვი (არჩევითი)</label>
+              <input
+                type="date"
+                id="date"
+                value={userInfo.laptop_purchase_date}
+                placeholder="დდ / თთ / წწწწ"
+                max="2022-09-01"
+                {...register("laptop_purchase_date")}
+                onChange={(e) =>
+                  saveInputsString("laptop_purchase_date", e.target.value)
+                }
+              />
+            </div>
+            <div className="laptop-form__form__bottom__container-right">
+              <label
+                htmlFor="laptop-form__form__bottom__container-right__name"
+                className="laptop-form__form__bottom__container-right__name-label"
+                style={errors.laptop_price ? { color: "#E52F2F" } : {}}
+              >
+                ლეპტოპის ფასი
+              </label>
+              <input
+                type="text"
+                id="laptop-form__form__bottom__container-right__name"
+                placeholder="0000"
+                {...register("laptop_price", {
+                  required: true,
+                  validate: {
+                    hasSpecialChar: (v) => /^[0-9]+$/.test(v!.toString()),
+                  },
+                })}
+                style={
+                  errors.laptop_price
+                    ? { borderColor: "#E52F2F", outline: "none" }
+                    : {}
+                }
+                value={
+                  userInfo.laptop_price !== null ? +userInfo.laptop_price : ""
+                }
+                onChange={(e) =>
+                  saveInputsNumber(e.target.name, +e.target.value)
+                }
+              />
+
+              <label
+                htmlFor="laptop-form__form__bottom__container-right__name"
+                className="laptop-form__form__bottom__container-right__name-label-two"
+              >
+                ₾
+              </label>
+              {errors.laptop_price ? (
+                <p style={{ color: "#E52F2F" }}>მხოლოდ ციფრები</p>
+              ) : (
+                <p>მხოლოდ ციფრები</p>
+              )}
+            </div>
+
+            <div className="laptop-form__form__bottom__radio">
+              <div className="laptop-form__form__bottom__radio-top">
+                <p style={errors.laptop_state ? { color: "#E52F2F" } : {}}>
+                  ლეპტოპის მდგომარეობა
+                </p>
+                {errors.laptop_state ? <img src={ExclSmall} alt="Error" /> : ""}
+              </div>
+              <div className="laptop-form__form__bottom__radio__container">
+                <input
+                  type="radio"
+                  id="new"
+                  className="laptop-form__form__bottom__radio__container-one"
+                  value="new"
+                  {...register("laptop_state", {
+                    required: true,
+                  })}
+                  onChange={(e) =>
+                    saveInputsString(e.target.name, e.target.value)
+                  }
+                />
+                <label htmlFor="new">ახალი</label>
+                <input
+                  type="radio"
+                  id="secondHand"
+                  className="laptop-form__form__bottom__radio__container-one"
+                  value="secondHand"
+                  {...register("laptop_state", {
+                    required: true,
+                  })}
+                  onChange={(e) =>
+                    saveInputsString(e.target.name, e.target.value)
+                  }
+                />
+                <label htmlFor="secondHand">მეორადი</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button className="laptop-form__form__button">დამახსოვრება</button>
       </form>
+
+      <button className="laptop-form__back">უკან</button>
     </div>
   );
 };
