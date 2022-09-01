@@ -125,15 +125,6 @@ export interface UseForm {
   position_id: number | null;
 }
 
-export interface UserFormToSend {
-  name: string;
-  surname: string;
-  email: string;
-  phone_number: string;
-  team_id: number | null;
-  position_id: number | null;
-}
-
 export interface WholeInfo {
   name: string;
   surname: string;
@@ -155,6 +146,15 @@ export interface WholeInfo {
   laptop_price: number | null;
 }
 
+export interface UserFormToSend {
+  name: string;
+  surname: string;
+  email: string;
+  phone_number: string;
+  team_id: number | null;
+  position_id: number | null;
+}
+
 export interface LaptopUseForm {
   laptop_name: string;
   laptop_image: string | unknown;
@@ -172,4 +172,7 @@ export interface LaptopUseForm {
 export interface LaptopFormProps {
   userInfo: WholeInfo;
   setUserInfo: (info: WholeInfo) => void;
+  setPage: (info: boolean) => void;
+  page: boolean;
+  sendData: () => void;
 }

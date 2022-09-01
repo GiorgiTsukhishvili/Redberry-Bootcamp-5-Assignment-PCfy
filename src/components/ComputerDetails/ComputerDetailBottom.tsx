@@ -13,7 +13,7 @@ const ComputerDetailBottom = ({ laptop }: { laptop: OnlyLaptop }) => {
           <h1>ლეპტოპის ფასი:</h1>
         </div>
         <div className="computer-detail__container__bottom__left-right">
-          <h1>{laptop.state}</h1>
+          <h1>{laptop.state === "new" ? "ახალი" : "მეორადი"}</h1>
           <h1>{laptop.price} ₾</h1>
         </div>
       </div>
