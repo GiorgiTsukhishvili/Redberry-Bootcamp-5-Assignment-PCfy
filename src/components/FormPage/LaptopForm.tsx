@@ -101,6 +101,7 @@ const LaptopForm = ({ userInfo, setUserInfo }: LaptopFormProps) => {
   };
 
   const saveInputsString = (e: string, input: string) => {
+    console.log(e);
     setUserInfo({ ...userInfo, [e]: input });
   };
 
@@ -329,19 +330,19 @@ const LaptopForm = ({ userInfo, setUserInfo }: LaptopFormProps) => {
               </div>
             </div>
           </div>
-          {/* <div className="laptop-form__form__middle__bottom">
+          <div className="laptop-form__form__middle__bottom">
             <div className="laptop-form__form__top-left">
               <label
                 htmlFor="laptop-form__form__top-left__name"
                 className="laptop-form__form__top-left__name-label"
                 style={errors.laptop_ram ? { color: "#E52F2F" } : {}}
               >
-                ლეპტოპის სახელი
+                ლეპტოპის RAM (GB)
               </label>
               <input
-                type="text"
+                type="number"
                 id="laptop-form__form__top-left__name"
-                placeholder="HP"
+                placeholder="16"
                 {...register("laptop_ram", {
                   required: true,
                   minLength: 2,
@@ -354,24 +355,63 @@ const LaptopForm = ({ userInfo, setUserInfo }: LaptopFormProps) => {
                     ? { borderColor: "#E52F2F", outline: "none" }
                     : {}
                 }
-                value={
-                  userInfo.laptop_cpu_threads !== null
-                    ? userInfo.laptop_cpu_threads
-                    : ""
-                }
+                value={userInfo.laptop_ram !== null ? userInfo.laptop_ram : ""}
                 onChange={(e) =>
                   saveInputsNumber(e.target.name, +e.target.value)
                 }
               />
               {errors.laptop_ram ? (
-                <p style={{ color: "#E52F2F" }}>
-                  ლათინური ასოები, ციფრები, !@#$%^&*()_+=
-                </p>
+                <p style={{ color: "#E52F2F" }}>მხოლოდ ციფრები</p>
               ) : (
-                <p>ლათინური ასოები, ციფრები, !@#$%^&*()_+=</p>
+                <p>მხოლოდ ციფრები</p>
               )}
             </div>
-          </div> */}
+
+            <div className="laptop-form__form__middle__bottom__radio">
+              <div className="laptop-form__form__middle__bottom__radio-top">
+                <p
+                  style={
+                    errors.laptop_hard_drive_type ? { color: "#E52F2F" } : {}
+                  }
+                >
+                  მეხსიერების ტიპი
+                </p>
+                {errors.laptop_hard_drive_type ? (
+                  <img src={ExclSmall} alt="Error" />
+                ) : (
+                  ""
+                )}
+              </div>
+              <div className="laptop-form__form__middle__bottom__radio__container">
+                <input
+                  type="radio"
+                  id="SSD"
+                  className="laptop-form__form__middle__bottom__radio__container-one"
+                  value="SSD"
+                  {...register("laptop_hard_drive_type", {
+                    required: true,
+                  })}
+                  onChange={(e) =>
+                    saveInputsString(e.target.name, e.target.value)
+                  }
+                />
+                <label htmlFor="SSD">SSD</label>
+                <input
+                  type="radio"
+                  id="HDD"
+                  className="laptop-form__form__middle__bottom__radio__container-one"
+                  value="HDD"
+                  {...register("laptop_hard_drive_type", {
+                    required: true,
+                  })}
+                  onChange={(e) =>
+                    saveInputsString(e.target.name, e.target.value)
+                  }
+                />
+                <label htmlFor="HDD">HDD</label>
+              </div>
+            </div>
+          </div>
         </div>
         <button>sda</button>
       </form>
