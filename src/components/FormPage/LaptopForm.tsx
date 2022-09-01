@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { fetchDefault } from "../../utilities/fetchdefaults";
 import Dropdown from "react-dropdown";
 import setDropdownValidHook from "../../hooks/setDropdownValidHook";
+import { Buffer } from "buffer";
 
 import {
   LaptopFormProps,
@@ -21,7 +22,13 @@ import Camera from "../../assets/images/camera.svg";
 import "../../styles/form/LaptopForm.scss";
 import "react-dropdown/style.css";
 
-const LaptopForm = ({ userInfo, setUserInfo }: LaptopFormProps) => {
+const LaptopForm = ({
+  userInfo,
+  setUserInfo,
+  setPage,
+  page,
+  sendData,
+}: LaptopFormProps) => {
   const {
     register,
     handleSubmit,
@@ -43,7 +50,7 @@ const LaptopForm = ({ userInfo, setUserInfo }: LaptopFormProps) => {
       changeDropdown("second", false);
       return;
     }
-    // console.log(data);
+    sendData();
   });
 
   useEffect(() => {
@@ -76,27 +83,36 @@ const LaptopForm = ({ userInfo, setUserInfo }: LaptopFormProps) => {
     fetch2();
   }, []);
 
-  const transformImage = async (files: FileList | null) => {
+  useEffect(() => {
+    const fromLocal = localStorage.getItem("user");
+    if (fromLocal) {
+      setUserInfo({
+        ...userInfo,
+        ...JSON.parse(fromLocal),
+        token: "2d20b5112d1d7d3d395f0a3671c78b62",
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    let time: any;
+
+    // გადავწყვიტე რო 1 წამიანი თაიმაუთი გამეკეთებინა რომ ყოველ პატარა ჩაწერაზე არ
+    // შემეწუხებინა ლოქალ სთორეჯი, ასე როცა დაამტავრებს ვინმე წერას 1 წამში შეივსება
+
+    time = setTimeout(
+      () => localStorage.setItem("user", JSON.stringify(userInfo)),
+      1000
+    );
+
+    return () => clearTimeout(time);
+  }, [userInfo]);
+
+  const transformImage = (files: FileList | null) => {
     if (files !== null) {
-      const convertImage = async () => {
-        return new Promise((resolve, reject) => {
-          const fileReader = new FileReader();
+      const file = files[0];
 
-          fileReader.readAsDataURL(files[0]);
-
-          fileReader.onload = () => {
-            resolve(fileReader.result);
-          };
-
-          fileReader.onerror = (error) => {
-            reject(error);
-          };
-        });
-      };
-
-      const convertedImage = await convertImage();
-
-      setUserInfo({ ...userInfo, laptop_image: convertedImage });
+      setUserInfo({ ...userInfo, laptop_image: file });
     }
   };
 
@@ -108,10 +124,16 @@ const LaptopForm = ({ userInfo, setUserInfo }: LaptopFormProps) => {
     setUserInfo({ ...userInfo, [e]: input });
   };
 
-  console.log(userInfo);
-
   const changeDro = (value: string, name: string) => {
     setUserInfo({ ...userInfo, [name]: +value });
+    changeDropdown("first", true);
+  };
+
+  const changeDroCpu = (value: string, name: string) => {
+    setUserInfo({
+      ...userInfo,
+      [name]: secondDropdown.filter((item) => item.value === value)[0].label,
+    });
     changeDropdown("first", true);
   };
 
@@ -124,9 +146,9 @@ const LaptopForm = ({ userInfo, setUserInfo }: LaptopFormProps) => {
 
   const defaultOptionTwo =
     userInfo.laptop_cpu !== null
-      ? firstDropdown.find(
-          (item) => item.value === userInfo.laptop_cpu?.toString()
-        )?.value
+      ? secondDropdown.find(
+          (item) => item.label === userInfo.laptop_cpu?.toString()
+        )?.label
       : "";
 
   return (
@@ -247,7 +269,7 @@ const LaptopForm = ({ userInfo, setUserInfo }: LaptopFormProps) => {
               }
               arrowClassName="laptop-form__form__middle__top-right__arrow"
               menuClassName="laptop-form__form__middle__top-right__menu"
-              onChange={(e) => changeDro(e.value, "laptop_cpu")}
+              onChange={(e) => changeDroCpu(e.value, "laptop_cpu")}
             />
 
             <div className="laptop-form__form__middle__top__input">
@@ -386,6 +408,9 @@ const LaptopForm = ({ userInfo, setUserInfo }: LaptopFormProps) => {
                   id="SSD"
                   className="laptop-form__form__middle__bottom__radio__container-one"
                   value="SSD"
+                  checked={
+                    userInfo.laptop_hard_drive_type === "SSD" ? true : false
+                  }
                   {...register("laptop_hard_drive_type", {
                     required: true,
                   })}
@@ -399,6 +424,9 @@ const LaptopForm = ({ userInfo, setUserInfo }: LaptopFormProps) => {
                   id="HDD"
                   className="laptop-form__form__middle__bottom__radio__container-one"
                   value="HDD"
+                  checked={
+                    userInfo.laptop_hard_drive_type === "HDD" ? true : false
+                  }
                   {...register("laptop_hard_drive_type", {
                     required: true,
                   })}
@@ -485,6 +513,7 @@ const LaptopForm = ({ userInfo, setUserInfo }: LaptopFormProps) => {
                   id="new"
                   className="laptop-form__form__bottom__radio__container-one"
                   value="new"
+                  checked={userInfo.laptop_state === "new" ? true : false}
                   {...register("laptop_state", {
                     required: true,
                   })}
@@ -495,9 +524,10 @@ const LaptopForm = ({ userInfo, setUserInfo }: LaptopFormProps) => {
                 <label htmlFor="new">ახალი</label>
                 <input
                   type="radio"
-                  id="secondHand"
+                  id="used"
                   className="laptop-form__form__bottom__radio__container-one"
-                  value="secondHand"
+                  value="used"
+                  checked={userInfo.laptop_state === "used" ? true : false}
                   {...register("laptop_state", {
                     required: true,
                   })}
@@ -505,7 +535,7 @@ const LaptopForm = ({ userInfo, setUserInfo }: LaptopFormProps) => {
                     saveInputsString(e.target.name, e.target.value)
                   }
                 />
-                <label htmlFor="secondHand">მეორადი</label>
+                <label htmlFor="used">მეორადი</label>
               </div>
             </div>
           </div>
@@ -514,7 +544,9 @@ const LaptopForm = ({ userInfo, setUserInfo }: LaptopFormProps) => {
         <button className="laptop-form__form__button">დამახსოვრება</button>
       </form>
 
-      <button className="laptop-form__back">უკან</button>
+      <button className="laptop-form__back" onClick={() => setPage(!page)}>
+        უკან
+      </button>
     </div>
   );
 };

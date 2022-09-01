@@ -12,9 +12,10 @@ import ArrowMobile from "../assets/images/Arrow-back-mobile.svg";
 import LogoLarge from "../assets/images/Logo-large.svg";
 
 import "../styles/form/FormPage.scss";
+import axios from "axios";
 
 const FormPage = () => {
-  const [page, setPage] = useState<boolean>(false);
+  const [page, setPage] = useState<boolean>(true);
   const [userInfo, setUserInfo] = useState<WholeInfo>({
     name: "",
     surname: "",
@@ -22,7 +23,7 @@ const FormPage = () => {
     phone_number: "",
     team_id: null,
     position_id: null,
-    token: "",
+    token: "2d20b5112d1d7d3d395f0a3671c78b62",
     laptop_name: "",
     laptop_image: "",
     laptop_brand_id: null,
@@ -42,6 +43,18 @@ const FormPage = () => {
     });
   };
 
+  const sendData = async () => {
+    await axios
+      .post(`https://pcfy.redberryinternship.ge/api/laptop/create`, userInfo, {
+        headers: {
+          accept: "application/json",
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      .then(() => (window.location.href = "/success"))
+      .catch((err) => console.log(err));
+  };
+
   return (
     <div className="form">
       <Link to="/">
@@ -58,7 +71,13 @@ const FormPage = () => {
           page={page}
         />
       ) : (
-        <LaptopForm userInfo={userInfo} setUserInfo={setUserInfo} />
+        <LaptopForm
+          userInfo={userInfo}
+          setUserInfo={setUserInfo}
+          setPage={setPage}
+          page={page}
+          sendData={sendData}
+        />
       )}
 
       <img src={LogoLarge} alt="Logo" className="form__logo" />
