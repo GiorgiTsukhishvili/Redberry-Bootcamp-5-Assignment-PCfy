@@ -1,0 +1,64 @@
+.computer-detail__container__bottom__left,
+.computer-detail__container__bottom__right {
+  gap: 10px;
+  display: flex;
+  animation: fromBottom 1.5s;
+
+  &-left {
+    & h1 {
+      font-weight: 500;
+      font-size: 22px;
+      width: 281px;
+      line-height: 27px;
+      color: #2e2e2e;
+      margin-bottom: 25px;
+    }
+  }
+
+  &-right {
+    & h1 {
+      font-weight: 400;
+      font-size: 22px;
+      line-height: 27px;
+      color: #797979;
+      margin-bottom: 25px;
+    }
+  }
+}
+
+@media (max-width: 395px) {
+  .computer-detail__container__bottom__left,
+  .computer-detail__container__bottom__right {
+    gap: 10px;
+    display: flex;
+
+    &-left {
+      & h1 {
+        font-size: 14px;
+        width: 187px;
+        line-height: 25px;
+        margin-bottom: 0;
+      }
+    }
+
+    &-right {
+      & h1 {
+        font-size: 14px;
+        line-height: 25px;
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+@keyframes fromBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(200px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

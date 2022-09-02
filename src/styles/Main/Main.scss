@@ -1,0 +1,80 @@
+@import "../styleUtilities/Variables.scss";
+
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &__logo {
+    margin: 79px 0 85px 0;
+  }
+
+  &__image {
+    margin-bottom: 97px;
+    animation: coming 2s;
+  }
+
+  &__image-phone {
+    display: none;
+    animation: coming 2s;
+  }
+
+  &__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    background-color: $button-color;
+    width: 387px;
+    height: 60px;
+    font-size: 20px;
+    font-weight: 500;
+    border-radius: 8px;
+    margin-top: 26px;
+    transition: all 0.3s;
+    line-height: 24px;
+  }
+
+  &__button:hover {
+    transform: translateY(-3px);
+  }
+
+  &__button:active {
+    transform: translateY(1px);
+  }
+}
+
+@media (max-width: 395px) {
+  .main {
+    &__logo {
+      margin: 67px 0 117px 0;
+    }
+
+    &__image {
+      display: none;
+    }
+
+    &__image-phone {
+      display: block;
+      margin-bottom: 106px;
+    }
+
+    &__button {
+      width: 358px;
+      margin-top: 16px;
+    }
+  }
+}
+
+@keyframes coming {
+  0% {
+    transform: translateY(-300px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
