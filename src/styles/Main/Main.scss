@@ -12,10 +12,12 @@
 
   &__image {
     margin-bottom: 97px;
+    animation: coming 2s;
   }
 
   &__image-phone {
     display: none;
+    animation: coming 2s;
   }
 
   &__button {
@@ -62,5 +64,17 @@
       width: 358px;
       margin-top: 16px;
     }
+  }
+}
+
+@keyframes coming {
+  0% {
+    transform: translateY(-300px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
   }
 }

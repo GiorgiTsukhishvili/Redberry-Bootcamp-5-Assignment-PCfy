@@ -1,5 +1,7 @@
+@import "../styleUtilities/Variables.scss";
+
 .form {
-  background-color: #f7f7f7;
+  background-color: $background-color;
 
   display: flex;
   justify-content: center;

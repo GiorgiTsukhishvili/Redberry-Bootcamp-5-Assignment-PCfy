@@ -1,3 +1,5 @@
+@import "../styleUtilities/Variables.scss";
+
 .computer-detail__container__top {
   width: 100%;
   padding-bottom: 84px;
@@ -10,17 +12,20 @@
     width: 577px;
     height: 342px;
     object-fit: contain;
+    animation: fade 1.5s;
   }
 
   &__content {
     display: flex;
+    animation: fromLeft 2s;
+
     &__middle-section {
       margin-right: 61px;
       & h1 {
         font-weight: 500;
         font-size: 22px;
         line-height: 27px;
-        color: #2e2e2e;
+        color: $text-color;
         margin-bottom: 32px;
       }
     }
@@ -70,5 +75,27 @@
         }
       }
     }
+  }
+}
+
+@keyframes fade {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fromLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(200px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
   }
 }

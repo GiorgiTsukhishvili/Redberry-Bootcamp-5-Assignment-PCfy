@@ -1,3 +1,5 @@
+@import "../styleUtilities/Variables.scss";
+
 .laptop-form {
   background: #ffffff;
   border-radius: 18px;
@@ -19,13 +21,20 @@
     align-items: center;
     position: relative;
 
+    &__uploaded {
+      position: absolute;
+      width: 878px;
+      height: 420px;
+      object-fit: cover;
+    }
+
     &__img,
     &__img--error {
       margin-top: 68px;
       background: #f7f7f7;
       width: 878px;
       height: 423px;
-      border: 2px dashed #4386a9;
+      border: 2px dashed $border-color;
       border-radius: 18px;
       position: relative;
       display: flex;
@@ -93,7 +102,7 @@
           display: flex;
           align-items: center;
           text-align: center;
-          color: #4386a9;
+          color: $border-color;
         }
 
         & button {
@@ -118,7 +127,7 @@
     }
 
     &__img--error {
-      border: 2px dashed #e52f2f;
+      border: 2px dashed $error-color;
       background: #fff1f1;
     }
   }
@@ -129,12 +138,12 @@
     gap: 63px;
     margin-top: 42px;
     padding-bottom: 44px;
-    border-bottom: 1px solid #c7c7c7;
+    border-bottom: 1px solid $border-bottom;
 
     @media (max-width: 395px) {
       flex-direction: column;
       gap: 10px;
-      border-bottom: 4px solid #c7c7c7;
+      border-bottom: 4px solid $border-bottom;
     }
 
     &-left,
@@ -159,7 +168,7 @@
 
       #laptop-form__form__top-left__name,
       #user-form__form__user-right__lastName {
-        border: 1.8px solid #8ac0e2;
+        border: 1.8px solid $border-focus;
         border-radius: 8px;
         width: 407px;
         height: 60px;
@@ -175,8 +184,8 @@
 
         &:focus {
           background: rgba(43, 75, 242, 0.06);
-          border: 1.8px solid #6499ff;
-          outline-color: #6499ff;
+          border: 1.8px solid $border-focus;
+          outline-color: $border-focus;
         }
       }
 
@@ -211,7 +220,7 @@
       }
 
       &__brand--wrong {
-        border: 1.8px solid #e52f2f;
+        border: 1.8px solid $error-color;
       }
 
       &__arrow {
@@ -244,10 +253,10 @@
     flex-direction: column;
     justify-content: center;
     margin-top: 42px;
-    border-bottom: 1px solid #c7c7c7;
+    border-bottom: 1px solid $border-bottom;
 
     @media (max-width: 395px) {
-      border-bottom: 4px solid #c7c7c7;
+      border-bottom: 4px solid $border-bottom;
       margin-top: 14px;
     }
 
@@ -284,7 +293,7 @@
       }
 
       &__cpu--wrong {
-        border: 1.8px solid #e52f2f;
+        border: 1.8px solid $error-color;
       }
 
       &-right__arrow {
@@ -328,7 +337,7 @@
           }
 
           #laptop-form__form__middle__top__input__each__name {
-            border: 1.8px solid #8ac0e2;
+            border: 1.8px solid $border-focus;
             border-radius: 8px;
             width: 276px;
             height: 60px;
@@ -340,8 +349,8 @@
 
             &:focus {
               background: rgba(43, 75, 242, 0.06);
-              border: 1.8px solid #6499ff;
-              outline-color: #6499ff;
+              border: 1.8px solid $border-focus;
+              outline-color: $border-focus;
             }
 
             @media (max-width: 395px) {
@@ -469,16 +478,23 @@
           width: 407px;
           height: 60px;
           padding: 0 16px;
-          border: 1.8px solid #8ac0e2;
+          border: 1.8px solid $border-focus;
           border-radius: 8px;
           font-style: normal;
           font-weight: 400;
           font-size: 16px;
           line-height: 21px;
           color: rgba(0, 0, 0, 0.6);
+
           @media (max-width: 395px) {
             width: 358px;
           }
+        }
+
+        #date:focus {
+          background: rgba(43, 75, 242, 0.06);
+          border: 1.8px solid $border-focus;
+          outline-color: $border-focus;
         }
       }
 
@@ -513,7 +529,7 @@
         }
 
         #laptop-form__form__bottom__container-right__name {
-          border: 1.8px solid #8ac0e2;
+          border: 1.8px solid $border-not-focus;
           border-radius: 8px;
           width: 407px;
           height: 60px;
@@ -529,8 +545,8 @@
 
           &:focus {
             background: rgba(43, 75, 242, 0.06);
-            border: 1.8px solid #6499ff;
-            outline-color: #6499ff;
+            border: 1.8px solid $border-focus;
+            outline-color: $border-focus;
           }
         }
 

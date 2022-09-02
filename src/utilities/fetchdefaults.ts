@@ -1,9 +1,9 @@
+import axios from "axios";
+
 export const fetchDefault = async (query: string) => {
-  const response = await fetch(
+  const response = await axios.get(
     `https://pcfy.redberryinternship.ge/api/${query}`
   );
 
-  const data = await response.json();
-
-  return data;
+  return response.data;
 };

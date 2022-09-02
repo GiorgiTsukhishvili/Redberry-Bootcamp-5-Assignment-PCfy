@@ -2,6 +2,7 @@
 .computer-detail__container__bottom__right {
   gap: 10px;
   display: flex;
+  animation: fromBottom 1.5s;
 
   &-left {
     & h1 {
@@ -47,5 +48,17 @@
         margin-bottom: 0;
       }
     }
+  }
+}
+
+@keyframes fromBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(200px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
   }
 }

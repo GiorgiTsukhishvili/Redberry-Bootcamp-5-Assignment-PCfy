@@ -1,3 +1,5 @@
+@import "../styleUtilities/Variables.scss";
+
 .user-form {
   background: #ffffff;
   border-radius: 18px;
@@ -32,7 +34,7 @@
 
         #user-form__form__user-left__name,
         #user-form__form__user-right__lastName {
-          border: 1.8px solid #8ac0e2;
+          border: 1.8px solid $border-not-focus;
           border-radius: 8px;
           width: 375px;
           height: 50px;
@@ -43,8 +45,8 @@
           line-height: 21px;
           &:focus {
             background: rgba(43, 75, 242, 0.06);
-            border: 1.8px solid #6499ff;
-            outline-color: #6499ff;
+            border: 1.8px solid $border-focus;
+            outline-color: $border-focus;
           }
         }
 
@@ -76,7 +78,7 @@
 
       #user-form__form__mail__input,
       #user-form__form__phone__input {
-        border: 1.8px solid #8ac0e2;
+        border: 1.8px solid $border-not-focus;
         border-radius: 8px;
         font-family: inherit;
 
@@ -89,8 +91,8 @@
 
         &:focus {
           background: rgba(43, 75, 242, 0.06);
-          border: 1.8px solid #6499ff;
-          outline-color: #6499ff;
+          border: 1.8px solid $border-focus;
+          outline-color: $border-focus;
         }
       }
 
@@ -138,7 +140,7 @@
   }
 
   &__dropdown--wrong {
-    border: 1.8px solid #e52f2f;
+    border: 1.8px solid $error-color;
   }
 
   &__arrow {
@@ -202,7 +204,7 @@
 
         #user-form__form__mail__input,
         #user-form__form__phone__input {
-          border: 1.8px solid #8ac0e2;
+          border: 1.8px solid $border-not-focus;
           border-radius: 8px;
           font-family: inherit;
 
@@ -215,8 +217,8 @@
 
           &:focus {
             background: rgba(43, 75, 242, 0.06);
-            border: 1.8px solid #6499ff;
-            outline-color: #6499ff;
+            border: 1.8px solid $border-focus;
+            outline-color: $border-focus;
           }
         }
 
