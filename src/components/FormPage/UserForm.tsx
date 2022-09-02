@@ -173,15 +173,17 @@ const UserForm = ({
               type="text"
               id="user-form__form__user-left__name"
               placeholder="გრიშა"
+              value={inputs.name}
               {...register("name", {
                 required: true,
                 minLength: 2,
-                pattern: /^[ა-ჰ]+$/,
+                validate: {
+                  hasSpecialChar: (v) => /^[ა-ჰ]+$/.test(v),
+                },
               })}
               style={
                 errors.name ? { borderColor: "#E52F2F", outline: "none" } : {}
               }
-              value={inputs.name}
               onChange={(e) => saveInputs(e.target.name, e.target.value)}
             />
             {errors.name ? (

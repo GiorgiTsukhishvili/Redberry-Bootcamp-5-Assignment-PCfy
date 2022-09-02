@@ -36,6 +36,7 @@ const LaptopForm = ({
   } = useForm<LaptopUseForm>();
   const [firstDropdown, setFirstDropdown] = useState<BrandModified[]>([]);
   const [secondDropdown, setSecondDropdown] = useState<CPUModified[]>([]);
+  const [uploadedImage, setUploadedImage] = useState<string>("");
   const { dropdownValid, changeDropdown } = setDropdownValidHook();
 
   const onSubmit = handleSubmit((data) => {
@@ -109,9 +110,10 @@ const LaptopForm = ({
   }, [userInfo]);
 
   const transformImage = (files: FileList | null) => {
-    if (files !== null) {
+    if (files !== null && files !== undefined) {
       const file = files[0];
 
+      setUploadedImage(URL.createObjectURL(file));
       setUserInfo({ ...userInfo, laptop_image: file });
     }
   };
@@ -171,6 +173,16 @@ const LaptopForm = ({
             })}
             onChange={(e) => transformImage(e.target.files)}
           />
+
+          {uploadedImage !== "" ? (
+            <img
+              src={uploadedImage}
+              alt="Uploaded"
+              className="laptop-form__form__uploaded"
+            />
+          ) : (
+            ""
+          )}
 
           <div className="laptop-form__form__img__desktop">
             <img

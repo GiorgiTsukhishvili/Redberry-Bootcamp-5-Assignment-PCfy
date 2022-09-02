@@ -39,6 +39,7 @@ const ComputerDetail = () => {
   useEffect(() => {
     const teamDetail = async () => {
       const data = await fetchDefault("teams");
+
       setTeam(data.data);
     };
 

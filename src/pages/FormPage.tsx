@@ -51,7 +51,10 @@ const FormPage = () => {
           "Content-Type": "multipart/form-data",
         },
       })
-      .then(() => (window.location.href = "/success"))
+      .then(() => {
+        window.location.href = "/success";
+        localStorage.clear();
+      })
       .catch((err) => console.log(err));
   };
 
