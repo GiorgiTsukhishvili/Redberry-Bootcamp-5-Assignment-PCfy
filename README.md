@@ -16,6 +16,7 @@ Package.json is also provided.
 - Uuid
 - Axios
 - React-dropdown
+- React hook form
 
 If you are having trouble installing React-dropdown try following:
 
