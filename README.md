@@ -1,7 +1,7 @@
 # Redberry Bootcamp 5 Assignment PCfy
 
 
-This is application is designed using **React** with **TypeScript**. This application was made for Redberry Bootcamp. In this application you will be able to do:
+This is application is designed using **React** with **TypeScript**. This application was made for Redberry Bootcamp and is made for two resolution: Desktop: (1920x1080), Mobile: (390x844 - IPhone 12 Pro). In this application you will be able to do:
 
 - See already listed forms
 - See each laptop details
@@ -15,13 +15,18 @@ Package.json is also provided.
 - React Router
 - Uuid
 - Axios
-- React-dropdown
+- React dropdown
 - React hook form
 
 If you are having trouble installing React-dropdown try following:
 
 ```bash
 npm install react-dropdown --force
+```
+Or:
+
+```bash
+npm install --force
 ```
 
 ## Apis Used In Project
@@ -30,7 +35,7 @@ npm install react-dropdown --force
 
 ## Deployed application
 
-[Live version of app](https://redberry-bootcamp.netlify.app/)
+[Live version of app](https://redberry-bootcamp-giorgi-tsukhishvil.netlify.app/)
 
 ## Images From Project
 
