@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 
 import { useForm } from "react-hook-form";
 
@@ -16,6 +16,7 @@ import "react-dropdown/style.css";
 
 import "../../styles/form/UserForm.scss";
 import setDropdownValidHook from "../../hooks/setDropdownValidHook";
+import { FormContext } from "../../context/FormContext";
 
 const UserForm = ({
   updateInfo,
@@ -26,14 +27,7 @@ const UserForm = ({
   setPage: (value: boolean) => void;
   page: boolean;
 }) => {
-  const [inputs, setInputs] = useState<UseForm>({
-    name: "",
-    surname: "",
-    email: "",
-    phone_number: "",
-    team_id: null,
-    position_id: null,
-  });
+  const { userInfo, setUserInfo } = useContext(FormContext);
 
   const { dropdownValid, changeDropdown } = setDropdownValidHook();
   const [firstDropdown, setFirstDropdown] = useState<TeamModified[]>([]);
@@ -46,44 +40,20 @@ const UserForm = ({
   } = useForm<UseForm>();
 
   const onSubmit = handleSubmit((data) => {
-    if (inputs.team_id === null && inputs.position_id === null) {
+    if (userInfo.team_id === null && userInfo.position_id === null) {
       changeDropdown("first", false);
       changeDropdown("second", false);
       return;
-    } else if (inputs.team_id === null) {
+    } else if (userInfo.team_id === null) {
       changeDropdown("first", false);
       return;
-    } else if (inputs.position_id === null) {
+    } else if (userInfo.position_id === null) {
       changeDropdown("second", false);
       return;
     }
 
-    updateInfo(inputs);
     setPage(!page);
   });
-
-  useEffect(() => {
-    const fromLocal = localStorage.getItem("user");
-    if (fromLocal) {
-      setInputs((prevState: UseForm) => {
-        return { ...prevState, ...JSON.parse(fromLocal) };
-      });
-    }
-  }, []);
-
-  useEffect(() => {
-    let time: any;
-
-    // გადავწყვიტე რო 1 წამიანი თაიმაუთი გამეკეთებინა რომ ყოველ პატარა ჩაწერაზე არ
-    // შემეწუხებინა ლოქალ სთორეჯი, ასე როცა დაამტავრებს ვინმე წერას 1 წამში შეივსება
-
-    time = setTimeout(
-      () => localStorage.setItem("user", JSON.stringify(inputs)),
-      1000
-    );
-
-    return () => clearTimeout(time);
-  }, [inputs]);
 
   useEffect(() => {
     const dataToUse: TeamModified[] = [];
@@ -108,7 +78,7 @@ const UserForm = ({
       const data = await fetchDefault("positions");
 
       const chosenTeam = data.data.filter(
-        (item: Position) => item.team_id === inputs.team_id
+        (item: Position) => item.team_id === userInfo.team_id
       );
 
       chosenTeam.forEach((item: Team) =>
@@ -119,41 +89,33 @@ const UserForm = ({
     };
 
     fetch();
-  }, [inputs.team_id]);
+  }, [userInfo.team_id]);
 
   const saveInputs = (e: string, input: string) => {
-    setInputs((prevState: UseForm) => {
-      return { ...prevState, [e]: input };
-    });
+    setUserInfo({ ...userInfo, [e]: input });
   };
 
   const changeFirst = (value: string) => {
-    setInputs((prevState: UseForm) => {
-      return { ...prevState, team_id: +value };
-    });
+    setUserInfo({ ...userInfo, team_id: +value, position_id: null });
     changeDropdown("first", true);
-    setInputs((prevState: UseForm) => {
-      return { ...prevState, position_id: null };
-    });
   };
 
   const changeSecond = (value: string) => {
-    setInputs((prevState: UseForm) => {
-      return { ...prevState, position_id: +value };
-    });
+    setUserInfo({ ...userInfo, position_id: +value });
     changeDropdown("second", true);
   };
 
   const defaultOptionOne =
-    inputs.team_id !== null
-      ? firstDropdown.find((item) => item.value === inputs.team_id?.toString())
-          ?.value
+    userInfo.team_id !== null
+      ? firstDropdown.find(
+          (item) => item.value === userInfo.team_id?.toString()
+        )?.value
       : "";
 
   const defaultOptionTwo =
-    inputs.position_id !== null
+    userInfo.position_id !== null
       ? secondDropdown.find(
-          (item) => item.value === inputs.position_id?.toString()
+          (item) => item.value === userInfo.position_id?.toString()
         )?.value
       : "";
 
@@ -173,7 +135,7 @@ const UserForm = ({
               type="text"
               id="user-form__form__user-left__name"
               placeholder="გრიშა"
-              value={inputs.name}
+              value={userInfo.name}
               {...register("name", {
                 required: true,
                 minLength: 2,
@@ -214,7 +176,7 @@ const UserForm = ({
                   ? { borderColor: "#E52F2F", outline: "none" }
                   : {}
               }
-              value={inputs.surname}
+              value={userInfo.surname}
               onChange={(e) => saveInputs(e.target.name, e.target.value)}
             />
             {errors.surname ? (
@@ -275,7 +237,7 @@ const UserForm = ({
             style={
               errors.email ? { borderColor: "#E52F2F", outline: "none" } : {}
             }
-            value={inputs.email}
+            value={userInfo.email}
             onChange={(e) => saveInputs(e.target.name, e.target.value)}
           />
           {errors.email ? (
@@ -308,7 +270,7 @@ const UserForm = ({
                 length: (v) => v.length === 13,
               },
             })}
-            value={inputs.phone_number}
+            value={userInfo.phone_number}
             onChange={(e) => saveInputs(e.target.name, e.target.value)}
             style={
               errors.phone_number
