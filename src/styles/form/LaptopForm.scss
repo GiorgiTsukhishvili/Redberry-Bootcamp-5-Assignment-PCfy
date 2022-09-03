@@ -23,9 +23,15 @@
 
     &__uploaded {
       position: absolute;
-      width: 878px;
+      width: 870px;
       height: 420px;
       object-fit: cover;
+      border-radius: 8px;
+
+      @media (max-width: 395px) {
+        width: 350px;
+        height: 220px;
+      }
     }
 
     &__img,
