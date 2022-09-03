@@ -170,8 +170,6 @@ export interface LaptopUseForm {
 }
 
 export interface LaptopFormProps {
-  userInfo: WholeInfo;
-  setUserInfo: (info: WholeInfo) => void;
   setPage: (info: boolean) => void;
   page: boolean;
   sendData: () => void;

@@ -1,10 +1,9 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState, useEffect, useContext } from "react";
 
 import { useForm } from "react-hook-form";
 import { fetchDefault } from "../../utilities/fetchdefaults";
 import Dropdown from "react-dropdown";
 import setDropdownValidHook from "../../hooks/setDropdownValidHook";
-import { Buffer } from "buffer";
 
 import {
   LaptopFormProps,
@@ -21,14 +20,11 @@ import Camera from "../../assets/images/camera.svg";
 
 import "../../styles/form/LaptopForm.scss";
 import "react-dropdown/style.css";
+import { FormContext } from "../../context/FormContext";
 
-const LaptopForm = ({
-  userInfo,
-  setUserInfo,
-  setPage,
-  page,
-  sendData,
-}: LaptopFormProps) => {
+const LaptopForm = ({ setPage, page, sendData }: LaptopFormProps) => {
+  const { userInfo, setUserInfo } = useContext(FormContext);
+
   const {
     register,
     handleSubmit,
@@ -83,31 +79,6 @@ const LaptopForm = ({
 
     fetch2();
   }, []);
-
-  useEffect(() => {
-    const fromLocal = localStorage.getItem("user");
-    if (fromLocal) {
-      setUserInfo({
-        ...userInfo,
-        ...JSON.parse(fromLocal),
-        token: "2d20b5112d1d7d3d395f0a3671c78b62",
-      });
-    }
-  }, []);
-
-  useEffect(() => {
-    let time: any;
-
-    // გადავწყვიტე რო 1 წამიანი თაიმაუთი გამეკეთებინა რომ ყოველ პატარა ჩაწერაზე არ
-    // შემეწუხებინა ლოქალ სთორეჯი, ასე როცა დაამტავრებს ვინმე წერას 1 წამში შეივსება
-
-    time = setTimeout(
-      () => localStorage.setItem("user", JSON.stringify(userInfo)),
-      1000
-    );
-
-    return () => clearTimeout(time);
-  }, [userInfo]);
 
   const transformImage = (files: FileList | null) => {
     if (files !== null && files !== undefined) {
