@@ -19,10 +19,6 @@ const FormPage = () => {
   const [page, setPage] = useState<boolean>(true);
   const { userInfo, setUserInfo } = useContext(FormContext);
 
-  const updateUserInfoOne = (info: UserFormToSend) => {
-    setUserInfo({ ...userInfo, ...info });
-  };
-
   const sendData = async () => {
     await axios
       .post(`https://pcfy.redberryinternship.ge/api/laptop/create`, userInfo, {
@@ -48,11 +44,7 @@ const FormPage = () => {
       <FormPageTop page={page} />
 
       {page ? (
-        <UserForm
-          updateInfo={updateUserInfoOne}
-          setPage={setPage}
-          page={page}
-        />
+        <UserForm setPage={setPage} page={page} />
       ) : (
         <LaptopForm setPage={setPage} page={page} sendData={sendData} />
       )}

@@ -124,6 +124,20 @@ const LaptopForm = ({ setPage, page, sendData }: LaptopFormProps) => {
         )?.label
       : "";
 
+  const validateDrop = () => {
+    if (userInfo.laptop_brand_id === null && userInfo.laptop_cpu === null) {
+      changeDropdown("first", false);
+      changeDropdown("second", false);
+      return;
+    } else if (userInfo.laptop_brand_id === null) {
+      changeDropdown("first", false);
+      return;
+    } else if (userInfo.laptop_cpu === null) {
+      changeDropdown("second", false);
+      return;
+    }
+  };
+
   return (
     <div className="laptop-form">
       <form onSubmit={onSubmit} className="laptop-form__form">
@@ -448,7 +462,7 @@ const LaptopForm = ({ setPage, page, sendData }: LaptopFormProps) => {
                 ლეპტოპის ფასი
               </label>
               <input
-                type="text"
+                type="number"
                 id="laptop-form__form__bottom__container-right__name"
                 placeholder="0000"
                 {...register("laptop_price", {
@@ -524,7 +538,9 @@ const LaptopForm = ({ setPage, page, sendData }: LaptopFormProps) => {
           </div>
         </div>
 
-        <button className="laptop-form__form__button">დამახსოვრება</button>
+        <button className="laptop-form__form__button" onClick={validateDrop}>
+          დამახსოვრება
+        </button>
       </form>
 
       <button className="laptop-form__back" onClick={() => setPage(!page)}>
