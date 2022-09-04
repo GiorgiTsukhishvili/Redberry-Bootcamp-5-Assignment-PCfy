@@ -19,11 +19,9 @@ import setDropdownValidHook from "../../hooks/setDropdownValidHook";
 import { FormContext } from "../../context/FormContext";
 
 const UserForm = ({
-  updateInfo,
   setPage,
   page,
 }: {
-  updateInfo: (info: UserFormToSend) => void;
   setPage: (value: boolean) => void;
   page: boolean;
 }) => {
@@ -118,6 +116,20 @@ const UserForm = ({
           (item) => item.value === userInfo.position_id?.toString()
         )?.value
       : "";
+
+  const validateDrop = () => {
+    if (userInfo.team_id === null && userInfo.position_id === null) {
+      changeDropdown("first", false);
+      changeDropdown("second", false);
+      return;
+    } else if (userInfo.team_id === null) {
+      changeDropdown("first", false);
+      return;
+    } else if (userInfo.position_id === null) {
+      changeDropdown("second", false);
+      return;
+    }
+  };
 
   return (
     <div className="user-form">
@@ -286,7 +298,9 @@ const UserForm = ({
             <p>უნდა აკმაყოფილებდეს ქართული მობ-ნომრის ფორმატს</p>
           )}
         </div>
-        <button className="user-form__button">შემდეგი</button>
+        <button className="user-form__button" onClick={validateDrop}>
+          შემდეგი
+        </button>
       </form>
     </div>
   );
