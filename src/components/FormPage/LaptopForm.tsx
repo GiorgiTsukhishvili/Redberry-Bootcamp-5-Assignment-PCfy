@@ -36,14 +36,14 @@ const LaptopForm = ({ setPage, page, sendData }: LaptopFormProps) => {
   const { dropdownValid, changeDropdown } = setDropdownValidHook();
 
   const onSubmit = handleSubmit((data) => {
-    if (userInfo.laptop_brand_id === null && userInfo.laptop_cpu === null) {
+    if (userInfo.laptop_brand_id === null && userInfo.laptop_cpu === "") {
       changeDropdown("first", false);
       changeDropdown("second", false);
       return;
     } else if (userInfo.laptop_brand_id === null) {
       changeDropdown("first", false);
       return;
-    } else if (userInfo.laptop_cpu === null) {
+    } else if (userInfo.laptop_cpu === "") {
       changeDropdown("second", false);
       return;
     }
@@ -107,7 +107,7 @@ const LaptopForm = ({ setPage, page, sendData }: LaptopFormProps) => {
       ...userInfo,
       [name]: secondDropdown.filter((item) => item.value === value)[0].label,
     });
-    changeDropdown("first", true);
+    changeDropdown("second", true);
   };
 
   const defaultOptionOne =
@@ -118,21 +118,21 @@ const LaptopForm = ({ setPage, page, sendData }: LaptopFormProps) => {
       : "";
 
   const defaultOptionTwo =
-    userInfo.laptop_cpu !== null
+    userInfo.laptop_cpu !== ""
       ? secondDropdown.find(
           (item) => item.label === userInfo.laptop_cpu?.toString()
         )?.label
       : "";
 
   const validateDrop = () => {
-    if (userInfo.laptop_brand_id === null && userInfo.laptop_cpu === null) {
+    if (userInfo.laptop_brand_id === null && userInfo.laptop_cpu === "") {
       changeDropdown("first", false);
       changeDropdown("second", false);
       return;
     } else if (userInfo.laptop_brand_id === null) {
       changeDropdown("first", false);
       return;
-    } else if (userInfo.laptop_cpu === null) {
+    } else if (userInfo.laptop_cpu === "") {
       changeDropdown("second", false);
       return;
     }
@@ -260,7 +260,7 @@ const LaptopForm = ({ setPage, page, sendData }: LaptopFormProps) => {
               value={defaultOptionTwo}
               placeholder="CPU"
               controlClassName={
-                dropdownValid.first
+                dropdownValid.second
                   ? "laptop-form__form__middle__top__cpu"
                   : "laptop-form__form__middle__top__cpu--wrong"
               }
